@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # 作者：小土堆
 # 公众号：土堆碎念
-#1231232
 import torch
 import torchvision
 from torch.utils.tensorboard import SummaryWriter
@@ -10,7 +9,7 @@ from torch.utils.tensorboard import SummaryWriter
 # 准备数据集
 from torch import nn
 from torch.utils.data import DataLoader
-
+import gc
 # 定义训练的设备
 device = torch.device("cuda")
 
@@ -41,19 +40,19 @@ def test_transform():
     return testT
 
 
-train_data = torchvision.datasets.ImageFolder(root=r"F:\data\CCTV旋转视频标注\data_split\train",
-                                        transform = train_transform()
-                                        )
+# train_data = torchvision.datasets.ImageFolder(root=r"F:\data\CCTV旋转视频标注\data_split\train",
+#                                         transform = train_transform()
+#                                         )
 
-test_data = torchvision.datasets.ImageFolder(root=r"F:\data\CCTV旋转视频标注\data_split\val",
-                                        transform = test_transform()
-                                        )
+# test_data = torchvision.datasets.ImageFolder(root=r"F:\data\CCTV旋转视频标注\data_split\val",
+#                                         transform = test_transform()
+#                                         )
 
 
-# train_data = torchvision.datasets.CIFAR10(root="../data", train=True, transform=torchvision.transforms.ToTensor(),
-#                                           download=True)
-# test_data = torchvision.datasets.CIFAR10(root="../data", train=False, transform=torchvision.transforms.ToTensor(),
-#                                          download=True)
+train_data = torchvision.datasets.CIFAR10(root="F:\Data\Cifa10", train=True, transform=torchvision.transforms.ToTensor(),
+                                          download=True)
+test_data = torchvision.datasets.CIFAR10(root="F:\Data\Cifa10", train=False, transform=torchvision.transforms.ToTensor(),
+                                         download=True)
 
 # length 长度
 train_data_size = len(train_data)
@@ -68,27 +67,27 @@ train_dataloader = DataLoader(train_data, batch_size=64)
 test_dataloader = DataLoader(test_data, batch_size=64)
 
 # 创建网络模型
-# class Tudui(nn.Module):
-#     def __init__(self):
-#         super(Tudui, self).__init__()
-#         self.model = nn.Sequential(
-#             nn.Conv2d(3, 32, 5, 1, 2),
-#             nn.MaxPool2d(2),
-#             nn.Conv2d(32, 32, 5, 1, 2),
-#             nn.MaxPool2d(2),
-#             nn.Conv2d(32, 64, 5, 1, 2),
-#             nn.MaxPool2d(2),
-#             nn.Flatten(),
-#             nn.Linear(64*4*4, 64),
-#             nn.Linear(64, 10)
-#         )
-#
-#     def forward(self, x):
-#         x = self.model(x)
-#         return x
+class Tudui(nn.Module):
+    def __init__(self):
+        super(Tudui, self).__init__()
+        self.model = nn.Sequential(
+            nn.Conv2d(3, 32, 5, 1, 2),
+            nn.MaxPool2d(2),
+            nn.Conv2d(32, 32, 5, 1, 2),
+            nn.MaxPool2d(2),
+            nn.Conv2d(32, 64, 5, 1, 2),
+            nn.MaxPool2d(2),
+            nn.Flatten(),
+            nn.Linear(64*4*4, 64),
+            nn.Linear(64, 10)
+        )
 
+    def forward(self, x):
+        x = self.model(x)
+        return x
 
-tudui = torchvision.models.vgg16()
+tudui = Tudui()
+# tudui = torchvision.models.vgg16()
 tudui = tudui.to(device)
 
 # 损失函数
