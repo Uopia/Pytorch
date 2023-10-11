@@ -37,7 +37,7 @@ def test_transform():
                        T.ToTensor(),
                        T.Normalize(mean=[0.523, 0.453, 0.345], std=[0.210, 0.199, 0.154])
                        ])
-    return testT
+    return testT 
 
 
 # train_data = torchvision.datasets.ImageFolder(root=r"F:\data\CCTV旋转视频标注\data_split\train",
