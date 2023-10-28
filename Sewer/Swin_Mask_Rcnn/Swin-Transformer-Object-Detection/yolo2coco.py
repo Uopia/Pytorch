@@ -1,4 +1,5 @@
 """
+https://zhuanlan.zhihu.com/p/341801502
 YOLO 格式的数据集转化为 COCO 格式的数据集
 --root_dir 输入根路径
 --save_path 保存文件的名字(没有random_split时使用)
