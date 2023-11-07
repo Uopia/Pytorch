@@ -379,7 +379,7 @@ class ModelEvaluation:
 model = torch.hub.load(r'D:\Desktop\YoloV5\yolov5', 'custom',
                        path=r'D:\Desktop\YoloV5\yolov5\yolo_1028\base_l\weights\best.pt', source='local')
 l1 = ModelEvaluation(model, r'D:\Desktop\Data1027\val', 'yolov5_t', ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_D', 'PL_P', 'QF', 'SG',
-                                                                        'SL', 'TL', 'ZW', 'JG_U', 'PL_L'], 0.5)
+                                                                        'SL', 'TL', 'ZW', 'JG_U', 'PL_L'], 0.2)
 # l1 = ModelEvaluation(model, r'D:\Desktop\Data1027\val', 'yolov5_t', ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'FZ', 'QF', 'SG',
 #                                                                         'SL', 'ZW', 'JG_U'], 0.5)
 # l1 = ModelEvaluation(model, r'D:\Desktop\YoloV5\val', 'yolov5_831_l', ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'FS', 'FZ', 'JG_D', 'QF', 'SG',

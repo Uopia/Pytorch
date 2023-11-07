@@ -20,8 +20,8 @@ from .custom import CustomDataset
 @DATASETS.register_module()
 class CocoDataset(CustomDataset):
 
-    CLASSES = ('AJ','BX','CJ','CK','CQ','CR','FS','FZ','JG_Down','PL_P','QF','SG',
-               'SL','TL','ZW','JG_Mid','JG_Up','PL_L')
+    CLASSES = ('AJ','BX','CJ','CK','CQ','CR','FS','FZ','JG_D','PL_P','QF','SG',
+               'SL','TL','ZW','JG_U','PL_L')
     # CLASSES = ('person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
     #            'train', 'truck', 'boat', 'traffic light', 'fire hydrant',
     #            'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog',

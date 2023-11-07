@@ -14,12 +14,12 @@ class ModelEvaluation:
 
         self.labels = {'AJ': np.zeros([3, 2]), 'BX': np.zeros([3, 2]), 'CJ': np.zeros([3, 2]),
                        'CK': np.zeros([3, 2]), 'CQ': np.zeros([3, 2]), 'CR': np.zeros([3, 2]),
-                       'FS': np.zeros([3, 2]), 'FZ': np.zeros([3, 2]), 'JG_Down': np.zeros([3, 2]),
-                       'PL': np.zeros([3, 2]), 'QF': np.zeros([3, 2]), 'SG': np.zeros([3, 2]),
+                       'FS': np.zeros([3, 2]), 'FZ': np.zeros([3, 2]), 'JG_D': np.zeros([3, 2]),
+                       'PL_P': np.zeros([3, 2]), 'QF': np.zeros([3, 2]), 'SG': np.zeros([3, 2]),
                        'SL': np.zeros([3, 2]), 'TL': np.zeros([3, 2]), 'ZW': np.zeros([3, 2]),
-                       'JG_Mid': np.zeros([3, 2]), 'JG_Up': np.zeros([3, 2]), 'PL_L': np.zeros([3, 2])}
-        self.labels_list = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_Down', 'PL', 'QF', 'SG',
-                            'SL', 'TL', 'ZW', 'JG_Mid', 'JG_Up', 'PL_L']
+                       'JG_U': np.zeros([3, 2]), 'PL_L': np.zeros([3, 2])}
+        self.labels_list = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_D', 'PL_P', 'QF', 'SG',
+                            'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
         self.folder = folder
         self.model_name = model_name
         self.use_name = set(use_name)
@@ -40,10 +40,10 @@ class ModelEvaluation:
         labels_set = set()
         self.labels = {'AJ': np.zeros([3, 2]), 'BX': np.zeros([3, 2]), 'CJ': np.zeros([3, 2]),
                        'CK': np.zeros([3, 2]), 'CQ': np.zeros([3, 2]), 'CR': np.zeros([3, 2]),
-                       'FS': np.zeros([3, 2]), 'FZ': np.zeros([3, 2]), 'JG_Down': np.zeros([3, 2]),
-                       'PL': np.zeros([3, 2]), 'QF': np.zeros([3, 2]), 'SG': np.zeros([3, 2]),
+                       'FS': np.zeros([3, 2]), 'FZ': np.zeros([3, 2]), 'JG_D': np.zeros([3, 2]),
+                       'PL_P': np.zeros([3, 2]), 'QF': np.zeros([3, 2]), 'SG': np.zeros([3, 2]),
                        'SL': np.zeros([3, 2]), 'TL': np.zeros([3, 2]), 'ZW': np.zeros([3, 2]),
-                       'JG_Mid': np.zeros([3, 2]), 'JG_Up': np.zeros([3, 2]), 'PL_L': np.zeros([3, 2])}
+                       'JG_U': np.zeros([3, 2]), 'PL_L': np.zeros([3, 2])}
         res_coos = []
         lab_coos = []
 

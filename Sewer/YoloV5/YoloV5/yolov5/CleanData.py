@@ -256,7 +256,7 @@
 
 
 
-# 划分数据集
+#划分数据集
 import os
 import random
 import shutil
@@ -314,9 +314,10 @@ for image_file in val_images:
     shutil.copy(src_label_path, dst_label_path)
 
 
-    
+print("数据分割完成。")
 
-# print("数据分割完成。")
+
+
 
 # 统计每个类别的行数
 # import os

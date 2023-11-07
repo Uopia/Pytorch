@@ -11,15 +11,9 @@ import torch
 matplotlib.use('TkAgg')
 config = r'D:/Swin/Swin-Transformer-Object-Detection/configs/swin/mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_adamw_3x_coco.py'
 checkpoint = r'D:\Swin\Swin-Transformer-Object-Detection\work_dirs\mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_adamw_3x_coco/epoch_22.pth'
-img_folder = r'D:\Swin\Data\coco\val'
+img_folder = r'D:\Swin\Data\coco\val1'
 device = 'cuda:0'
-s_folder = r'D:\Swin\Data\coco'
-use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'FS', 'FZ', 'JG_Down', 'QF', 'SG',
-             'SL', 'TL', 'ZW']
-# use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_Down', 'PL', 'QF', 'SG',
-#              'SL', 'TL', 'ZW', 'JG_Mid', 'JG_Up', 'PL_L']
 
-cf = 0.1
 
 def main():
     # parser = ArgumentParser()
@@ -53,8 +47,8 @@ def main():
 
     i = 0
     while img_paths:
-        if len(img_path) > 50:
-            img_path = img_paths[0:50]
+        if len(img_path) > 100:
+            img_path = img_paths[0:100]
         else:
             img_path = img_paths
 
@@ -77,10 +71,12 @@ def main():
         else:
             break
 
-    m = ModelEvaluation(s_folder, "COCO", results, img_local, cf, use_label)
+    m = ModelEvaluation(r'D:\Swin\Data\coco', folder, "COCO", results, img_local)
     m.calculate()
-    m.print_res()
-    m.output_log()
+    m.print_res(['AJ', 'BX', 'CJ', 'CK', 'CQ', 'FS', 'FZ', 'JG_Down', 'QF', 'SG',
+                'SL', 'TL', 'ZW'])
+    m.output_log(['AJ', 'BX', 'CJ', 'CK', 'CQ', 'FS', 'FZ', 'JG_Down', 'QF', 'SG',
+                 'SL', 'TL', 'ZW'])
     # show_result_pyplot(model, img_path, img_result, score_thr=score_thr)
 
 
@@ -89,7 +85,7 @@ def move_files(files, destination_folder):
         os.makedirs(destination_folder)
 
     for file in files:
-        if len(os.listdir(destination_folder)) < 50:
+        if len(os.listdir(destination_folder)) < 100:
             source_path = file
             destination_path = os.path.join(destination_folder, file.split("\\")[-1])
             shutil.move(source_path, destination_path)

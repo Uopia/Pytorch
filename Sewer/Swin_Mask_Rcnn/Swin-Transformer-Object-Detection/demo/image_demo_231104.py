@@ -1,8 +1,8 @@
-# 将每张图片放进模型中进行预测，将预测结果保存在results中，包括把视频分割和组合
+# 将图片文件夹中的图片进行检测，并将结果输出到指定文件夹中（）
 from argparse import ArgumentParser
 import os
 from mmdet.apis import inference_detector, init_detector, show_result_pyplot
-from Model_evaluation_cl_TF_231101 import ModelEvaluation
+from Model_evaluation_cl_TF_231104 import ModelEvaluation
 import numpy as np
 import shutil
 import torch
@@ -10,10 +10,10 @@ from tqdm import tqdm
 
 config = r'D:\Desktop\Swin\Swin-Transformer-Object-Detection\work_dirs\mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_adamw_3x_coco.py'
 checkpoint = r'D:\Desktop\Swin\Swin-Transformer-Object-Detection\work_dirs\epoch_26.pth'
-img_folder = r'D:\Desktop\data\images'
+img_folder = r'D:\Desktop\PIC_VIDEO\V2P\6'
 # img_folder = r'D:\Desktop\Swin\Data\val\images'
 device = 'cuda:0'
-s_folder = r'D:\Desktop\data'
+s_folder = r'D:\Desktop\PIC_VIDEO\V2P\6'
 # use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'PL_P', 'QF', 'SG', 'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
 # use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_D', 'PL_P', 'QF', 'SG', 'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
 use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'SG', 'SL', 'TL', 'ZW', 'JG_U']
@@ -41,8 +41,8 @@ def main():
 
     m = ModelEvaluation(s_folder, "COCO", a, img_local, cf, use_label)
     m.calculate()
-    m.print_res()
-    m.output_log()
+    # m.print_res()
+    # m.output_log()
     # show_result_pyplot(model, img_paths, img_result, score_thr=score_thr)
 
 if __name__ == '__main__':
