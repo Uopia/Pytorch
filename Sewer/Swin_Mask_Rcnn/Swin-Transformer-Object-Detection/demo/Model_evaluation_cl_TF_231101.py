@@ -1,4 +1,4 @@
-# 一张一张处理
+# 评估训练模型的效果并绘制对比特征图片，生成在对应文件夹
 from tkinter import Frame
 import cv2
 import numpy as np
@@ -100,8 +100,10 @@ class ModelEvaluation:
             r_l = results_set.intersection(labels_set)
 
             font = cv2.FONT_HERSHEY_SIMPLEX
+
+            # 画最好的图片
             if not results_set.symmetric_difference(labels_set):
-                # 画最好的图片
+            
                 img_cvt_c = copy.deepcopy(img_cvt)
                 img_cvt_cc = copy.deepcopy(img_cvt)
 
@@ -134,8 +136,9 @@ class ModelEvaluation:
                     os.makedirs(f'{self.folder}/page_g')
                 cv2.imwrite(f'{self.folder}/page_g/{names}.jpg', mage)
 
+            # 画最差的图片
             if not r_l:
-                # 画最差的图片
+            
                 img_cvt_c = copy.deepcopy(img_cvt)
                 img_cvt_cc = copy.deepcopy(img_cvt)
 

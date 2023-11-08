@@ -1,4 +1,4 @@
-# 将每张图片放进模型中进行预测，将预测结果保存在results中，包括把视频分割和组合
+# 将每张图片放进模型中进行预测，将预测结果保存在results中
 from argparse import ArgumentParser
 import os
 from mmdet.apis import inference_detector, init_detector, show_result_pyplot

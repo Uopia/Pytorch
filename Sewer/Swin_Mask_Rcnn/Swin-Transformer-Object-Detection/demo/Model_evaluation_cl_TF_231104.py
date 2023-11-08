@@ -1,4 +1,4 @@
-# 分割组合视频+分每类阈值
+# 在输入图片中画框，并生成在另一个文件夹
 from tkinter import Frame
 import cv2
 import numpy as np
@@ -89,13 +89,13 @@ class ModelEvaluation:
             
             for res_coo in res_coos:
                 
-                    img_cvt_c = cv2.rectangle(img_cvt_c, (int(min(res_coo[0], res_coo[2])),
-                                                        int(min(res_coo[1], res_coo[3]))),
-                                            (int(max(res_coo[0], res_coo[2])), int(max(res_coo[1], res_coo[3]))),
-                                            color=(0, 0, 255), thickness=5)
-                    img_cvt_c = cv2.putText(img_cvt_c, res_coo[-1], (int(min(res_coo[0], res_coo[2])) + 10,
-                                                                    int(max(res_coo[1], res_coo[3])) - 10),
-                                            font, 0.8, (0, 255, 255), 3)
+                img_cvt_c = cv2.rectangle(img_cvt_c, (int(min(res_coo[0], res_coo[2])),
+                                                    int(min(res_coo[1], res_coo[3]))),
+                                        (int(max(res_coo[0], res_coo[2])), int(max(res_coo[1], res_coo[3]))),
+                                        color=(0, 0, 255), thickness=5)
+                img_cvt_c = cv2.putText(img_cvt_c, res_coo[-1], (int(min(res_coo[0], res_coo[2])) + 10,
+                                                                int(max(res_coo[1], res_coo[3])) - 10),
+                                        font, 0.8, (0, 255, 255), 3)
                     
             cv2.imwrite(f'{self.folder}/img_all/{names}.jpg', img_cvt_c)
 

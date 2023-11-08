@@ -206,49 +206,49 @@ class ModelEvaluation:
                 cv2.imwrite(f'{self.folder}/lab_b/{b_label}/{names}.jpg', mage)
                 f.close()
 
-                # 画好的特征
-                for g_label in r_l:
+            # 画好的特征
+            for g_label in r_l:
 
-                    img_cvt_c = copy.deepcopy(img_cvt)
-                    img_cvt_cc = copy.deepcopy(img_cvt)
+                img_cvt_c = copy.deepcopy(img_cvt)
+                img_cvt_cc = copy.deepcopy(img_cvt)
 
-                    w = img_cvt_c.shape[1]
-                    h = img_cvt_c.shape[0]
+                w = img_cvt_c.shape[1]
+                h = img_cvt_c.shape[0]
 
-                    if not os.path.exists(f'{self.folder}/lab_g/{g_label}'):
-                        os.makedirs(f'{self.folder}/lab_g/{g_label}')
-                    f = open(f"{self.folder}/lab_g/{g_label}/{names}.txt", "a", encoding="UTF-8")
-                    for res_coo in res_coos:
-                        if res_coo[-1] == g_label:
-                            img_cvt_c = cv2.rectangle(img_cvt_c, (int(min(res_coo[0], res_coo[2])),
-                                                                  int(min(res_coo[1], res_coo[3]))),
-                                                      (int(max(res_coo[0], res_coo[2])),
-                                                       int(max(res_coo[1], res_coo[3]))),
-                                                      color=(0, 0, 255), thickness=5)
-                            img_cvt_c = cv2.putText(img_cvt_c, res_coo[-1], (int(min(res_coo[0], res_coo[2])) + 10,
-                                                                             int(max(res_coo[1], res_coo[3])) - 10),
-                                                    font, 0.8, (0, 255, 255), 3)
-                            f.write(f"{self.labels_list.index(res_coo[-1])} {(res_coo[0] + res_coo[2])/2/w} {(res_coo[1] + res_coo[3])/2/h} {abs(res_coo[0] - res_coo[2]) / w} {abs(res_coo[1] - res_coo[3]) / h}\n")
+                if not os.path.exists(f'{self.folder}/lab_g/{g_label}'):
+                    os.makedirs(f'{self.folder}/lab_g/{g_label}')
+                f = open(f"{self.folder}/lab_g/{g_label}/{names}.txt", "a", encoding="UTF-8")
+                for res_coo in res_coos:
+                    if res_coo[-1] == g_label:
+                        img_cvt_c = cv2.rectangle(img_cvt_c, (int(min(res_coo[0], res_coo[2])),
+                                                                int(min(res_coo[1], res_coo[3]))),
+                                                    (int(max(res_coo[0], res_coo[2])),
+                                                    int(max(res_coo[1], res_coo[3]))),
+                                                    color=(0, 0, 255), thickness=5)
+                        img_cvt_c = cv2.putText(img_cvt_c, res_coo[-1], (int(min(res_coo[0], res_coo[2])) + 10,
+                                                                            int(max(res_coo[1], res_coo[3])) - 10),
+                                                font, 0.8, (0, 255, 255), 3)
+                        f.write(f"{self.labels_list.index(res_coo[-1])} {(res_coo[0] + res_coo[2])/2/w} {(res_coo[1] + res_coo[3])/2/h} {abs(res_coo[0] - res_coo[2]) / w} {abs(res_coo[1] - res_coo[3]) / h}\n")
 
-                    for lab_coo in lab_coos:
-                        if lab_coo[-1] == g_label:
-                            img_cvt_cc = cv2.rectangle(img_cvt_cc, (int(w * (lab_coo[0] - lab_coo[2] / 2)),
-                                                                    int(h * (lab_coo[1] - lab_coo[3] / 2))),
-                                                       (int(w * (lab_coo[0] + lab_coo[2] / 2)),
-                                                        int(h * (lab_coo[1] + lab_coo[3] / 2))),
-                                                       color=(255, 0, 0), thickness=5)
-                            img_cvt_cc = cv2.putText(img_cvt_cc, lab_coo[-1],
-                                                     (int(w * (lab_coo[0] - lab_coo[2] / 2)) + 10,
-                                                      int(h * (lab_coo[1] + lab_coo[3] / 2)) - 10),
-                                                     font, 0.8, (255, 255, 0), 3)
-                            # f.write(f"{self.labels_list.index(lab_coo[-1])}, ,{lab_coo[0]}, ,{lab_coo[1]}, ,{lab_coo[2]}, ,{lab_coo[3]}\n")
+                for lab_coo in lab_coos:
+                    if lab_coo[-1] == g_label:
+                        img_cvt_cc = cv2.rectangle(img_cvt_cc, (int(w * (lab_coo[0] - lab_coo[2] / 2)),
+                                                                int(h * (lab_coo[1] - lab_coo[3] / 2))),
+                                                    (int(w * (lab_coo[0] + lab_coo[2] / 2)),
+                                                    int(h * (lab_coo[1] + lab_coo[3] / 2))),
+                                                    color=(255, 0, 0), thickness=5)
+                        img_cvt_cc = cv2.putText(img_cvt_cc, lab_coo[-1],
+                                                    (int(w * (lab_coo[0] - lab_coo[2] / 2)) + 10,
+                                                    int(h * (lab_coo[1] + lab_coo[3] / 2)) - 10),
+                                                    font, 0.8, (255, 255, 0), 3)
+                        # f.write(f"{self.labels_list.index(lab_coo[-1])}, ,{lab_coo[0]}, ,{lab_coo[1]}, ,{lab_coo[2]}, ,{lab_coo[3]}\n")
 
-                    mage = np.zeros((h, w * 2, 3), np.uint8)
-                    mage[0:h, 0:w] = img_cvt_c
-                    mage[0:h, w:2 * w] = img_cvt_cc
+                mage = np.zeros((h, w * 2, 3), np.uint8)
+                mage[0:h, 0:w] = img_cvt_c
+                mage[0:h, w:2 * w] = img_cvt_cc
 
-                    cv2.imwrite(f'{self.folder}/lab_g/{g_label}/{names}.jpg', mage)
-                    f.close()
+                cv2.imwrite(f'{self.folder}/lab_g/{g_label}/{names}.jpg', mage)
+                f.close()
 
             # 临时将FZ与CJ当做同一类
             if "CJ" in results_set or "FZ" in results_set:
