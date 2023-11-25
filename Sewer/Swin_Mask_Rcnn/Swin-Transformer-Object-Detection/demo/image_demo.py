@@ -14,9 +14,8 @@ img_folder = r'D:\Desktop\data\images'
 # img_folder = r'D:\Desktop\Swin\Data\val\images'
 device = 'cuda:0'
 s_folder = r'D:\Desktop\data'
-# use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'PL_P', 'QF', 'SG', 'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
-# use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_D', 'PL_P', 'QF', 'SG', 'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
-use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'SG', 'SL', 'TL', 'ZW', 'JG_U']
+use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_D', 'PL_P', 'QF', 'SG', 'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
+# use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'SG', 'SL', 'TL', 'ZW', 'JG_U']
 cf = 0.3
 
 def main():

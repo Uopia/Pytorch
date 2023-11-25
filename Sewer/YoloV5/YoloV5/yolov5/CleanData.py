@@ -64,33 +64,33 @@
 
 
 
-## 对比两个文件夹中的文件名差异
-# import os
+# 对比两个文件夹中的文件名差异
+import os
 
-# # 定义两个文件夹的路径
-# folder1_path = r'D:\Desktop\Data1027\images'
-# folder2_path = r'D:\Desktop\Data1027\labels'
+# 定义两个文件夹的路径
+folder1_path = r'D:\Desktop\Data1027\images'
+folder2_path = r'D:\Desktop\Data1027\labels'
 
-# # 获取文件夹1中的文件名（不包含后缀）
-# folder1_files = set(os.path.splitext(f)[0] for f in os.listdir(folder1_path) if os.path.isfile(os.path.join(folder1_path, f)))
+# 获取文件夹1中的文件名（不包含后缀）
+folder1_files = set(os.path.splitext(f)[0] for f in os.listdir(folder1_path) if os.path.isfile(os.path.join(folder1_path, f)))
 
-# # 获取文件夹2中的文件名（不包含后缀）
-# folder2_files = set(os.path.splitext(f)[0] for f in os.listdir(folder2_path) if os.path.isfile(os.path.join(folder2_path, f)))
+# 获取文件夹2中的文件名（不包含后缀）
+folder2_files = set(os.path.splitext(f)[0] for f in os.listdir(folder2_path) if os.path.isfile(os.path.join(folder2_path, f)))
 
-# # 找到文件夹1中独特的文件名
-# unique_to_folder1 = folder1_files - folder2_files
+# 找到文件夹1中独特的文件名
+unique_to_folder1 = folder1_files - folder2_files
 
-# # 找到文件夹2中独特的文件名
-# unique_to_folder2 = folder2_files - folder1_files
+# 找到文件夹2中独特的文件名
+unique_to_folder2 = folder2_files - folder1_files
 
-# # 打印独特文件名
-# print("文件夹1中独特的文件名:")
-# for filename in unique_to_folder1:
-#     print(filename)
+# 打印独特文件名
+print("文件夹1中独特的文件名:")
+for filename in unique_to_folder1:
+    print(filename)
 
-# print("\n文件夹2中独特的文件名:")
-# for filename in unique_to_folder2:
-#     print(filename)
+print("\n文件夹2中独特的文件名:")
+for filename in unique_to_folder2:
+    print(filename)
 
 
 
@@ -257,64 +257,64 @@
 
 
 #划分数据集
-import os
-import random
-import shutil
+# import os
+# import random
+# import shutil
 
-# 定义源文件夹路径
-data_folder = "D:/Desktop/Data1027"
+# # 定义源文件夹路径
+# data_folder = "D:/Desktop/Data1027"
 
-# 定义训练集和验证集的比例
-train_ratio = 0.8
+# # 定义训练集和验证集的比例
+# train_ratio = 0.8
 
-# 创建目标文件夹
-train_images_folder = os.path.join(data_folder, "train", "images")
-val_images_folder = os.path.join(data_folder, "val", "images")
-train_labels_folder = os.path.join(data_folder, "train", "labels")
-val_labels_folder = os.path.join(data_folder, "val", "labels")
+# # 创建目标文件夹
+# train_images_folder = os.path.join(data_folder, "train", "images")
+# val_images_folder = os.path.join(data_folder, "val", "images")
+# train_labels_folder = os.path.join(data_folder, "train", "labels")
+# val_labels_folder = os.path.join(data_folder, "val", "labels")
 
-os.makedirs(train_images_folder, exist_ok=True)
-os.makedirs(val_images_folder, exist_ok=True)
-os.makedirs(train_labels_folder, exist_ok=True)
-os.makedirs(val_labels_folder, exist_ok=True)
+# os.makedirs(train_images_folder, exist_ok=True)
+# os.makedirs(val_images_folder, exist_ok=True)
+# os.makedirs(train_labels_folder, exist_ok=True)
+# os.makedirs(val_labels_folder, exist_ok=True)
 
-# 获取所有图像文件的列表
-images_folder = os.path.join(data_folder, "images")
-image_files = os.listdir(images_folder)
-random.shuffle(image_files)
+# # 获取所有图像文件的列表
+# images_folder = os.path.join(data_folder, "images")
+# image_files = os.listdir(images_folder)
+# random.shuffle(image_files)
 
-# 根据比例分割训练集和验证集
-split_index = int(len(image_files) * train_ratio)
-train_images = image_files[:split_index]
-val_images = image_files[split_index:]
+# # 根据比例分割训练集和验证集
+# split_index = int(len(image_files) * train_ratio)
+# train_images = image_files[:split_index]
+# val_images = image_files[split_index:]
 
-# 将图像和标签文件复制到相应的文件夹
-for image_file in train_images:
-    # 复制图像文件
-    src_image_path = os.path.join(images_folder, image_file)
-    dst_image_path = os.path.join(train_images_folder, image_file)
-    shutil.copy(src_image_path, dst_image_path)
+# # 将图像和标签文件复制到相应的文件夹
+# for image_file in train_images:
+#     # 复制图像文件
+#     src_image_path = os.path.join(images_folder, image_file)
+#     dst_image_path = os.path.join(train_images_folder, image_file)
+#     shutil.copy(src_image_path, dst_image_path)
 
-    # 复制对应的标签文件
-    label_file = os.path.splitext(image_file)[0] + ".txt"
-    src_label_path = os.path.join(data_folder, "labels", label_file)
-    dst_label_path = os.path.join(train_labels_folder, label_file)
-    shutil.copy(src_label_path, dst_label_path)
+#     # 复制对应的标签文件
+#     label_file = os.path.splitext(image_file)[0] + ".txt"
+#     src_label_path = os.path.join(data_folder, "labels", label_file)
+#     dst_label_path = os.path.join(train_labels_folder, label_file)
+#     shutil.copy(src_label_path, dst_label_path)
 
-for image_file in val_images:
-    # 复制图像文件
-    src_image_path = os.path.join(images_folder, image_file)
-    dst_image_path = os.path.join(val_images_folder, image_file)
-    shutil.copy(src_image_path, dst_image_path)
+# for image_file in val_images:
+#     # 复制图像文件
+#     src_image_path = os.path.join(images_folder, image_file)
+#     dst_image_path = os.path.join(val_images_folder, image_file)
+#     shutil.copy(src_image_path, dst_image_path)
 
-    # 复制对应的标签文件
-    label_file = os.path.splitext(image_file)[0] + ".txt"
-    src_label_path = os.path.join(data_folder, "labels", label_file)
-    dst_label_path = os.path.join(val_labels_folder, label_file)
-    shutil.copy(src_label_path, dst_label_path)
+#     # 复制对应的标签文件
+#     label_file = os.path.splitext(image_file)[0] + ".txt"
+#     src_label_path = os.path.join(data_folder, "labels", label_file)
+#     dst_label_path = os.path.join(val_labels_folder, label_file)
+#     shutil.copy(src_label_path, dst_label_path)
 
 
-print("数据分割完成。")
+# print("数据分割完成。")
 
 
 
