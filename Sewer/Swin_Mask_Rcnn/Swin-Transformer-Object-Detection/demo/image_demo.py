@@ -8,12 +8,12 @@ import shutil
 import torch
 from tqdm import tqdm
 
-config = r'D:\Desktop\Swin\Swin-Transformer-Object-Detection\work_dirs\mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_adamw_3x_coco.py'
-checkpoint = r'D:\Desktop\Swin\Swin-Transformer-Object-Detection\work_dirs\epoch_26.pth'
-img_folder = r'D:\Desktop\data\images'
+config = r'D:\Desktop\Swin-Transformer-Object-Detection\work_dirs\mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_adamw_3x_coco.py'
+checkpoint = r'D:\Desktop\Swin-Transformer-Object-Detection\work_dirs\epoch_35.pth'
+img_folder = r'D:\Desktop\Data\images'
 # img_folder = r'D:\Desktop\Swin\Data\val\images'
 device = 'cuda:0'
-s_folder = r'D:\Desktop\data'
+s_folder = r'D:\Desktop\Data'
 use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'JG_D', 'PL_P', 'QF', 'SG', 'SL', 'TL', 'ZW', 'JG_U', 'PL_L']
 # use_label = ['AJ', 'BX', 'CJ', 'CK', 'CQ', 'CR', 'FS', 'FZ', 'SG', 'SL', 'TL', 'ZW', 'JG_U']
 cf = 0.3

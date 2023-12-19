@@ -39,5 +39,10 @@ labels_folder = 'D:\\Desktop\\Data11\\lab_g\\AJ'
 images_folder = 'D:\\Desktop\\data\\images'
 dest_folder = 'D:\\Desktop\\images'
 
+
+# labels_folder = r'D:\Desktop\Data\labels'
+# images_folder = r'F:\Data\CodeData\Data1123\val'
+# dest_folder = 'D:\Desktop\Data\images'
+
 # 执行复制操作
 copy_matching_images(labels_folder, images_folder, dest_folder)

@@ -2,8 +2,8 @@
 import os
 
 # 定义两个文件夹的路径
-folder1_path = r'D:\Desktop\Data11\images'
-folder2_path = r'D:\Desktop\Data11\labels'
+folder1_path = r'D:\Desktop\Data\images'
+folder2_path = r'D:\Desktop\Data\labels'
 
 # 获取文件夹1中的文件名（不包含后缀）
 folder1_files = set(os.path.splitext(f)[0] for f in os.listdir(folder1_path) if os.path.isfile(os.path.join(folder1_path, f)))

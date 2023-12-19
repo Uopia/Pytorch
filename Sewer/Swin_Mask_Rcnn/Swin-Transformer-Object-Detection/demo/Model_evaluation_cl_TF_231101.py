@@ -31,21 +31,21 @@ class ModelEvaluation:
         self.len = len(self.labels_list)
         self.labels_cf = np.zeros([1, self.len])[0]+cf
         self.labels_cf[0] = 0.55
-        self.labels_cf[1] = 0.6
-        self.labels_cf[2] = 0.3
-        self.labels_cf[3] = 0.45
-        self.labels_cf[4] = 0.25
-        self.labels_cf[5] = 0.5
-        self.labels_cf[6] = 0.3
-        self.labels_cf[7] = 0.05
-        self.labels_cf[8] = 0.4
-        self.labels_cf[9] = 0.3
+        self.labels_cf[1] = 0.55
+        self.labels_cf[2] = 0.6
+        self.labels_cf[3] = 0.65
+        self.labels_cf[4] = 0.45
+        self.labels_cf[5] = 0.6
+        self.labels_cf[6] = 0.45
+        self.labels_cf[7] = 0.4
+        self.labels_cf[8] = 0.45
+        self.labels_cf[9] = 0.5
         self.labels_cf[10] = 0.3
-        self.labels_cf[11] = 0.7
-        self.labels_cf[12] = 0.3
-        self.labels_cf[13] = 0.5
-        self.labels_cf[14] = 0.3
-        self.labels_cf[15] = 0.4
+        self.labels_cf[11] = 0.5
+        self.labels_cf[12] = 0.4
+        self.labels_cf[13] = 0.45
+        self.labels_cf[14] = 0.4
+        self.labels_cf[15] = 0.6
         self.labels_cf[16] = 0.4
         # self.images_path = os.path.join(folder, img_folder)
         self.labels_path = os.path.join(folder, 'labels')
@@ -83,6 +83,7 @@ class ModelEvaluation:
             val = []
             if os.path.isfile(label_path):
                 f = open(label_path, "r", encoding="UTF-8")
+                print(names)
                 val = f.readlines()
                 f.close()
 
