@@ -193,14 +193,14 @@ class BoxCoder(object):
     def decode(self, rel_codes, boxes):
         # type: (Tensor, List[Tensor]) -> Tensor
         """
-
         Args:
             rel_codes: bbox regression parameters
             boxes: anchors/proposals
-
         Returns:
-
         """
+
+        # boxes_per_image每张图片有多少个anchors
+        # concat_boxes把所有图片的anchors拼接在一起
         assert isinstance(boxes, (list, tuple))
         assert isinstance(rel_codes, torch.Tensor)
         boxes_per_image = [b.size(0) for b in boxes]
@@ -210,7 +210,7 @@ class BoxCoder(object):
         for val in boxes_per_image:
             box_sum += val
 
-        # 将预测的bbox回归参数应用到对应anchors上得到预测bbox的坐标
+        # 将预测的bbox回归参数（rel_codes）应用到对应anchors上得到预测bbox的坐标
         pred_boxes = self.decode_single(
             rel_codes, concat_boxes
         )

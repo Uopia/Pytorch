@@ -11,7 +11,7 @@ from torchvision import transforms
 from network_files import FasterRCNN, FastRCNNPredictor, AnchorsGenerator
 from backbone import resnet50_fpn_backbone, MobileNetV2
 from draw_box_utils import draw_objs
-
+os.environ['KMP_DUPLICATE_LIB_OK']='TRUE'
 
 def create_model(num_classes):
     # mobileNetv2+faster_RCNN
@@ -52,7 +52,7 @@ def main():
     model = create_model(num_classes=21)
 
     # load train weights
-    weights_path = "./save_weights/model.pth"
+    weights_path = "./save_weights/resNetFpn-model-0.pth"
     assert os.path.exists(weights_path), "{} file dose not exist.".format(weights_path)
     weights_dict = torch.load(weights_path, map_location='cpu')
     weights_dict = weights_dict["model"] if "model" in weights_dict else weights_dict

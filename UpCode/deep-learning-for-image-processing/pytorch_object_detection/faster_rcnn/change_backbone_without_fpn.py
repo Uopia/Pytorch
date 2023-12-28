@@ -15,12 +15,14 @@ def create_model(num_classes):
     from torchvision.models.feature_extraction import create_feature_extractor
 
     # vgg16
+    # backbone = torchvision.models.vgg16_bn(pretrained=False)
     backbone = torchvision.models.vgg16_bn(pretrained=True)
     # print(backbone)
     backbone = create_feature_extractor(backbone, return_nodes={"features.42": "0"})
     # out = backbone(torch.rand(1, 3, 224, 224))
     # print(out["0"].shape)
     backbone.out_channels = 512
+    # print(backbone)
 
     # resnet50 backbone
     # backbone = torchvision.models.resnet50(pretrained=True)
@@ -203,7 +205,7 @@ if __name__ == "__main__":
     # 训练设备类型
     parser.add_argument('--device', default='cuda:0', help='device')
     # 训练数据集的根目录(VOCdevkit)
-    parser.add_argument('--data-path', default='./', help='dataset')
+    parser.add_argument('--data-path', default='F:/Data', help='dataset')
     # 检测目标类别数(不包含背景)
     parser.add_argument('--num-classes', default=20, type=int, help='num_classes')
     # 文件保存地址

@@ -47,7 +47,7 @@ class AnchorsGenerator(nn.Module):
         sizes (Tuple[Tuple[int]]):
         aspect_ratios (Tuple[Tuple[float]]):
     """
-
+    # size是指anchors的尺寸，aspect_ratios是指anchors的长宽比
     def __init__(self, sizes=(128, 256, 512), aspect_ratios=(0.5, 1.0, 2.0)):
         super(AnchorsGenerator, self).__init__()
 
@@ -182,14 +182,19 @@ class AnchorsGenerator(nn.Module):
 
         # one step in feature map equate n pixel stride in origin image
         # 计算特征层上的一步等于原始图像上的步长
+        # 800/200 = 4 1216/304 = 4
         strides = [[torch.tensor(image_size[0] // g[0], dtype=torch.int64, device=device),
                     torch.tensor(image_size[1] // g[1], dtype=torch.int64, device=device)] for g in grid_sizes]
 
-        # 根据提供的sizes和aspect_ratios生成anchors模板
+        # 根据提供的sizes和aspect_ratios生成anchors模板，这个模板是以(0, 0)为中心的anchor
+        # resnet50中有5个预测特征层，mobilev2中有1个预测特征层
+        # resnet50共5*3个anchors模板，mobilev2共1*15个anchors模板
+        # 每个模板4个参数，分别是(xmin, ymin, xmax, ymax)
+        # 参数保存在self.cell_anchors中
         self.set_cell_anchors(dtype, device)
 
         # 计算/读取所有anchors的坐标信息（这里的anchors信息是映射到原图上的所有anchors信息，不是anchors模板）
-        # 得到的是一个list列表，对应每张预测特征图映射回原图的anchors坐标信息
+        # 得到的是一个list列表，对应每张预测特征图映射回原图的anchors坐标信息，所有的anchors对可以在原图上进行对应了
         anchors_over_all_feature_maps = self.cached_grid_anchors(grid_sizes, strides)
 
         anchors = torch.jit.annotate(List[List[torch.Tensor]], [])
@@ -217,7 +222,10 @@ class RPNHead(nn.Module):
         in_channels: number of channels of the input feature
         num_anchors: number of anchors to be predicted
     """
-
+    # in_channels是指输入特征层的通道数（是backbone的最后的输出）
+    # num_anchors是指每层预测特征层上预测的anchors的数目
+    # 输出的数值logits和bbox_reg。
+    # logits是指预测的目标概率，bbox_reg是指预测的bbox regression参数
     def __init__(self, in_channels, num_anchors):
         super(RPNHead, self).__init__()
         # 3x3 滑动窗口
@@ -227,11 +235,13 @@ class RPNHead(nn.Module):
         # 计算预测的目标bbox regression参数
         self.bbox_pred = nn.Conv2d(in_channels, num_anchors * 4, kernel_size=1, stride=1)
 
+        # 初始化权重
         for layer in self.children():
             if isinstance(layer, nn.Conv2d):
                 torch.nn.init.normal_(layer.weight, std=0.01)
                 torch.nn.init.constant_(layer.bias, 0)
-
+    # x是指预测特征层的输出，是个list，每个元素为一个预测特征层的输出
+    # x就是features的值
     def forward(self, x):
         # type: (List[Tensor]) -> Tuple[List[Tensor], List[Tensor]]
         logits = []
@@ -454,8 +464,8 @@ class RegionProposalNetwork(torch.nn.Module):
                 num_anchors, pre_nms_top_n = _onnx_get_num_anchors_and_pre_nms_top_n(ob, self.pre_nms_top_n())
             else:
                 num_anchors = ob.shape[1]  # 预测特征层上的预测的anchors个数
-                pre_nms_top_n = min(self.pre_nms_top_n(), num_anchors)
-
+                pre_nms_top_n = min(self.pre_nms_top_n(), num_anchors) # 取两者中的最小的一个
+            # 获取ob上第一个维度概率排前pre_nms_top_n的索引值
             # Returns the k largest elements of the given input tensor along a given dimension
             _, top_n_idx = ob.topk(pre_nms_top_n, dim=1)
             r.append(top_n_idx + offset)
@@ -610,11 +620,12 @@ class RegionProposalNetwork(torch.nn.Module):
         # 生成一个batch图像的所有anchors信息,list(tensor)元素个数等于batch_size
         anchors = self.anchor_generator(images, features)
 
-        # batch_size
+        # batch_size, anchors的第一个维度
         num_images = len(anchors)
 
         # numel() Returns the total number of elements in the input tensor.
         # 计算每个预测特征层上的对应的anchors数量
+        # 对于多个特征层的网络，num_anchor_per_level每个层加起来=anchors中每张图片的anchors数量
         num_anchors_per_level_shape_tensors = [o[0].shape for o in objectness]
         num_anchors_per_level = [s[0] * s[1] * s[2] for s in num_anchors_per_level_shape_tensors]
 
